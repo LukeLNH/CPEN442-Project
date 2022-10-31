@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from dataclass import MasterAccount, MessagingAppProfile
 
 app = Flask(__name__)
 
