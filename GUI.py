@@ -28,7 +28,12 @@ def login():
     Label(login_screen, text="").pack()
     Button(login_screen, text="Login", width=10, height=1, command=login_verification).pack()
 
+    #https://stackoverflow.com/questions/111155/how-do-i-handle-the-window-close-event-in-tkinter
+    login_screen.protocol("WM_DELETE_WINDOW", on_closing)
     login_screen.mainloop()
+    
+def on_closing():
+    login_screen.destroy()
 
 def login_verification():
     global success_screen
@@ -44,7 +49,9 @@ def login_verification():
     Button(success_screen, text="View Messaging Profiles with Assigned Keys", width=40, height=1, command=view_known_profiles_frame).pack()
     Button(success_screen, text="Assign a new key to a new Messaging Profile", width=40, height=1, command=assign_new_key_frame).pack()
     Button(success_screen, text="Revoke Key from Messaging Profile", width=40, height=1, command=revoke_key_frame).pack()
-
+    
+    success_screen.protocol("WM_DELETE_WINDOW", on_closing)
+    login_screen.protocol("WM_DELETE_WINDOW", on_closing)
     login_screen.withdraw()
 
 def view_known_profiles_frame():
@@ -61,6 +68,9 @@ def view_known_profiles_frame():
 
     text = '\n'.join(f"{k}" for k in master_account.id_key_dict.keys())
     Label(known_profiles_screen, text=text).pack()
+    
+    #known_profiles_screen.protocol("WM_DELETE_WINDOW", on_closing)
+    login_screen.protocol("WM_DELETE_WINDOW", on_closing)
 
 
 def assign_new_key_frame():
@@ -77,6 +87,9 @@ def assign_new_key_frame():
     message_id_entry.pack()
 
     Button(assign_key_frame, text="Assign Key", width=20, height=1, command=assign_key).pack()
+    
+    #assign_key_frame.protocol("WM_DELETE_WINDOW", on_closing)
+    login_screen.protocol("WM_DELETE_WINDOW", on_closing)
 
 def assign_key():
     master_account = MasterAccount()
@@ -97,6 +110,9 @@ def assign_key():
     Label(assign_success_frame, text="").pack()
     Label(assign_success_frame, text="Successfully assigned new key to profile with ID: ").pack()
     Label(assign_success_frame, text=assign_message_id.get()).pack()
+    
+    #assign_success_frame.protocol("WM_DELETE_WINDOW", on_closing)
+    login_screen.protocol("WM_DELETE_WINDOW", on_closing)
 
 def revoke_key_frame():
     revoke_key_frame = Toplevel(success_screen)
@@ -112,6 +128,9 @@ def revoke_key_frame():
     message_id_entry.pack()
 
     Button(revoke_key_frame, text="Revoke Key", width=20, height=1, command=revoke_key).pack()
+    
+    #revoke_key_frame.protocol("WM_DELETE_WINDOW", on_closing)
+    login_screen.protocol("WM_DELETE_WINDOW", on_closing)
 
 def revoke_key():
     master_account = MasterAccount()
@@ -132,5 +151,8 @@ def revoke_key():
     Label(assign_success_frame, text="").pack()
     Label(assign_success_frame, text="Successfully revoked key from profile with ID: ").pack()
     Label(assign_success_frame, text=revoke_message_id.get()).pack()
+    
+    #assign_success_frame.protocol("WM_DELETE_WINDOW", on_closing)
+    login_screen.protocol("WM_DELETE_WINDOW", on_closing)
 
 login() # call the main_account_screen() function
