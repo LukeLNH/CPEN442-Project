@@ -45,8 +45,12 @@ class MessagingAppProfile:
 
         return signed_nonce
 
-    def revoke_key(self, org_name): # Probably won't need for MVP, do it if we have time.
-        pass
+    def revoke_key(self, org_name):
+        try:
+            self.private_signatures.pop(org_name)
+        except:
+            # all good
+            pass
 
 
 class MasterAccount:
@@ -89,6 +93,11 @@ class MasterAccount:
     def get_published_public_keys(self):
         return self.id_key_dict.values()
 
-    def revoke_key(self): # Probably won't need for MVP, do it if we have time.
-        pass
+    def revoke_key(self, new_account: MessagingAppProfile):
+        try:
+            self.id_key_dict.pop(new_account.id)
+            new_account.revoke_key(self.org_name)
+        except:
+            # all good
+            pass
 
