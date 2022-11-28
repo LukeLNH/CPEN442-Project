@@ -7,14 +7,6 @@ import pandas as pd
 
 app = Flask(__name__)
 
-VERIFICATION_SUCCESS_MESSAGE = jsonify({
-    'verification_success': True
-})
-
-VERIFICATION_FAILURE_MESSAGE = jsonify({
-    'verification_success': False
-})
-
 @app.route("/")
 def initialize_server():
     json_res = {
@@ -33,6 +25,14 @@ def list_all_organizations():
 
 @app.route("/verify_account", methods=['POST'])
 def verify_account():
+    VERIFICATION_SUCCESS_MESSAGE = jsonify({
+        'verification_success': True
+    })
+
+    VERIFICATION_FAILURE_MESSAGE = jsonify({
+        'verification_success': False
+    })
+    
     # parse out the following:
     # - messaging id of sender
     # - company name the sender claims to be from
