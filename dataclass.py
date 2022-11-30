@@ -84,7 +84,7 @@ class MasterAccount:
     def issue_private_key(self, new_account: MessagingAppProfile):
         key = RSA.generate(2048)
 
-        public_key = public_key = key.publickey().export_key()
+        public_key = key.publickey().export_key()
         self.id_key_dict[new_account.id] = public_key
         
         private_key = key.export_key()

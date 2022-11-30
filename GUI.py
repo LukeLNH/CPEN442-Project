@@ -43,7 +43,7 @@ def login_verification():
     success_screen.geometry("400x200")
 
     Label(success_screen, text="").pack()
-    Label(success_screen, text=f"Welcome, org: MockOrg").pack()
+    Label(success_screen, text=f"Welcome, org: UBC_IT").pack()
     Label(success_screen, text="").pack()
 
     Button(success_screen, text="View Messaging Profiles with Assigned Keys", width=40, height=1, command=view_known_profiles_frame).pack()
@@ -60,7 +60,7 @@ def view_known_profiles_frame():
     known_profiles_screen.geometry("400x300")
 
     master_account = MasterAccount()
-    master_account.load_account_from_org_name("MockOrg")
+    master_account.load_account_from_org_name("UBC_IT")
     
     # https://stackoverflow.com/questions/20768405/print-dictionary-in-python-ttk
     header_text = 'IDs of profiles with a key assigned'
@@ -93,7 +93,7 @@ def assign_new_key_frame():
 
 def assign_key():
     master_account = MasterAccount()
-    master_account.load_account_from_org_name("MockOrg")
+    master_account.load_account_from_org_name("UBC_IT")
 
     messaging_profile = MessagingAppProfile()
     messaging_profile.load_profile_from_id(assign_message_id.get())
@@ -134,7 +134,7 @@ def revoke_key_frame():
 
 def revoke_key():
     master_account = MasterAccount()
-    master_account.load_account_from_org_name("MockOrg")
+    master_account.load_account_from_org_name("UBC_IT")
 
     messaging_profile = MessagingAppProfile()
     messaging_profile.load_profile_from_id(revoke_message_id.get())
