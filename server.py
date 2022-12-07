@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 from dataclass import MasterAccount, MessagingAppProfile
 from Crypto import Random
 from Crypto.Signature import pkcs1_15
@@ -8,8 +9,11 @@ import pandas as pd
 import json
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/")
+@cross_origin()
 def initialize_server():
     json_res = {
         "message": "YEET"
@@ -34,6 +38,7 @@ def list_all_organizations():
 
 
 @app.route("/verify_account", methods=['POST'])
+@cross_origin()
 def verify_account():
     VERIFICATION_MESSAGE = {
         'id': "",
